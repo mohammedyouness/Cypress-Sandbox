@@ -23,3 +23,12 @@ Cypress.Commands.add('register', function (condition) {
 		cy.get('.signupbtn').click({ force: true });
 	});
 });
+Cypress.Commands.add('login', condition => {
+	cy.fixture('userData').then(user => {
+		if (condition)
+			cy.get('[name="username"]').type(randomEmail, { force: true });
+		else cy.get('[name="username"]').type(user.existentEmail, { force: true });
+		cy.get('[name="password"]').type(user.password, { force: true });
+		cy.get('.loginbtn').click({ force: true });
+	});
+});

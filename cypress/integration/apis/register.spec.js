@@ -7,10 +7,10 @@ describe('test all the Valid and Invalid user signup scenarios', () => {
 		});
 		it(`When I fill out the signup form with valid data and press the signup button, Then I should be successfully authenticated and directed to the user account tab, where I can see my user data and the Hello message`, () => {
 			cy.intercept('POST', 'https://phptravels.net/account/signup').as(
-				'postRequest'
+				'registerRequest'
 			);
 			cy.register();
-			cy.wait('@postRequest').then(xhr => {
+			cy.wait('@registerRequest').then(xhr => {
 				expect(xhr.response.statusCode).to.eql(200);
 				let reqBody = xhr.request.body.split('&');
 				let firstName = reqBody[0],
