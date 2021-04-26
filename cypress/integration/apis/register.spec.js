@@ -5,7 +5,7 @@ describe('test all the Valid and Invalid user signup scenarios', () => {
 		beforeEach(() => {
 			cy.visit('/' + 'register');
 		});
-		it(`should be successfully authenticated and directed to the user account tab, where I can see my user data and the Hello message`, () => {
+		it(`When I fill out the signup form with valid data and press the signup button, Then I should be successfully authenticated and directed to the user account tab, where I can see my user data and the Hello message`, () => {
 			cy.intercept('POST', 'https://phptravels.net/account/signup').as(
 				'postRequest'
 			);
@@ -27,5 +27,16 @@ describe('test all the Valid and Invalid user signup scenarios', () => {
 				);
 			});
 		});
+	});
+	context('invalid user signup', () => {
+		beforeEach(() => {
+			cy.visit('/' + 'register');
+		});
+		it.only('Given that I previously signed up with an email, When I use same email for a new sign up, Then I should receive an error message', () => {
+			cy.register('used');
+			cy.get('.alert').should('contain', 'Email Already Exists.');
+		});
+		// it('When I sign up for an incorrect email format, Then I should receive an error message', () => {
+		// });
 	});
 });
