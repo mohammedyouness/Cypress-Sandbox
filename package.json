@@ -1,0 +1,15 @@
+{
+	"name": "cypress-sandbox",
+	"version": "1.0.0",
+	"description": "A place where I practice and try new stuff in Cypress",
+	"main": "index.js",
+	"scripts": {
+		"test": "npx cypress open"
+	},
+	"author": "Mhmd Yunus",
+	"license": "ISC",
+	"devDependencies": {
+		"cypress": "^7.1.0",
+		"faker": "^5.5.3"
+	}
+}
