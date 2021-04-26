@@ -11,10 +11,8 @@ describe('test all the Valid and Invalid user signup scenarios', () => {
 			);
 			cy.register();
 			cy.wait('@postRequest').then(xhr => {
-				// console.log(xhr);
 				expect(xhr.response.statusCode).to.eql(200);
 				let reqBody = xhr.request.body.split('&');
-				// console.log(reqBody);
 				let firstName = reqBody[0],
 					lastName = reqBody[1];
 
