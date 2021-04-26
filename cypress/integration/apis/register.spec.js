@@ -32,11 +32,16 @@ describe('test all the Valid and Invalid user signup scenarios', () => {
 		beforeEach(() => {
 			cy.visit('/' + 'register');
 		});
-		it.only('Given that I previously signed up with an email, When I use same email for a new sign up, Then I should receive an error message', () => {
+		it('Given that I previously signed up with an email, When I use same email for a new sign up, Then I should receive an error message', () => {
 			cy.register('used');
 			cy.get('.alert').should('contain', 'Email Already Exists.');
 		});
-		// it('When I sign up for an incorrect email format, Then I should receive an error message', () => {
-		// });
+		it('When I sign up for an incorrect email format, Then I should receive an error message', () => {
+			cy.register('incorrect');
+			cy.get('.alert').should(
+				'contain',
+				'The Email field must contain a valid email address.'
+			);
+		});
 	});
 });

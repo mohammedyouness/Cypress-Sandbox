@@ -6,13 +6,15 @@ const randomEmail = faker.internet.email();
 const password = faker.internet.password();
 const confirmPassword = password;
 
-Cypress.Commands.add('register', usedEmail => {
+Cypress.Commands.add('register', function (condition) {
 	cy.fixture('userData').then(user => {
 		cy.get('[name="firstname"]').type(firstName, { force: true });
 		cy.get('[name="lastname"]').type(lastName, { force: true });
 		cy.get('[name="phone"]').type(mobileNumer, { force: true });
-		if (usedEmail)
+		if (arguments[0] === 'used')
 			cy.get('[name="email"]').type(user.existentEmail, { force: true });
+		else if (arguments[0] === 'incorrect')
+			cy.get('[name="email"]').type(user.incorrectEmail, { force: true });
 		else cy.get('[name="email"]').type(randomEmail, { force: true });
 		cy.get('[name="password"]').type(password, { force: true });
 		cy.get('[name="confirmpassword"]').type(confirmPassword, {
